@@ -3,8 +3,8 @@ Donate link: http://ulogin.ru/
 Tags: ulogin, login, social, authorization
 Requires at least: 2.0.18.22
 Tested up to: 2.0.18.22
-Stable tag: 1.7
-License: GPL3
+Stable tag: 1.6
+
 Форма авторизации uLogin через социальные сети. Улучшенный аналог loginza.
 
 == Description ==
@@ -17,3 +17,16 @@ uLogin — это инструмент, который позволяет пол
 1. Распакуйте архив с плагином в папку `/plugins/`
 2. Активируйте плагин через меню 'Dashboard' в панели Addons -> Plugins, нажатием кнопки Enable
 
+== Frequently Asked Questions ==
+
+= Нужно ли где-то регистрироваться, чтобы плагин заработал? =
+
+Нет, плагин заработает сразу после установки!
+
+== Screenshots ==
+
+1. Форма комментирования
+
+== Changelog ==
+
+== Upgrade Notice ==
