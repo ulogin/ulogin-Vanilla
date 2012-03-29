@@ -4,6 +4,7 @@ Tags: ulogin, login, social, authorization
 Requires at least: 2.0.18.22
 Tested up to: 2.0.18.22
 Stable tag: 1.7
+License: GPL3
 
 Форма авторизации uLogin через социальные сети. Улучшенный аналог loginza.
 
