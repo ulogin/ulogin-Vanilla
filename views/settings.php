@@ -32,9 +32,9 @@ echo $this->Form->Errors();
                echo $this->Form->Label('SignIn widget type', 'Widget type at SignIn window');
                echo $this->Form->RadioList('display2',array('panel' => 'Panel<br/>', 'small'=>'Small panel<br/>','window'=>'Popup window'));
                echo $this->Form->Label('Providers', 'Providers');
-               echo $this->Form->CheckBoxList('providers',array('VKontakte' => 'vkontakte', 'Odnoklassniki.ru'=>'odnoklassniki','Mail.ru'=>'mailru','Facebook'=>'facebook','Twitter' => 'twitter', 'Google'=>'google','Yandex'=>'yandex','LiveJournal'=>'livejournal', 'Open ID' => 'openid'));
+               echo $this->Form->TextBox('providers');
                echo $this->Form->Label('Drop down menu', 'Drop down menu');
-               echo $this->Form->CheckBoxList('hidden',array('VKontakte' => 'vkontakte', 'Odnoklassniki.ru'=>'odnoklassniki','Mail.ru'=>'mailru','Facebook'=>'facebook','Twitter' => 'twitter', 'Google'=>'google','Yandex'=>'yandex','LiveJournal'=>'livejournal', 'Open ID' => 'openid'));
+               echo $this->Form->TextBox('hidden');
             ?>
          </li>
       </ul>

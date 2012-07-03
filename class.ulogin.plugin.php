@@ -14,7 +14,7 @@ License: GPL3
 $PluginInfo['uLogin'] = array(
   'Name' => 'uLogin Plugin',
   'Description' => 'This plugin allows users to sign in with their Facebook, Vkontakte, Odnoklassniki, Google accounts.',
-  'Version' => '1.2',
+  'Version' => '1.3',
   'RequiredTheme' => FALSE,
   'MobileFriendly' => TRUE,
   'HasLocale' => TRUE,
@@ -71,10 +71,10 @@ class uLoginPlugin extends Gdn_Plugin {
             $Settings['Plugins.uLogin.display2'] = 'small';
         }
         if (!C('Plugins.uLogin.providers')){
-            $Settings['Plugins.uLogin.providers'] = array('VKontakte' => 'vkontakte', 'Odnoklassniki.ru'=>'odnoklassniki','Mail.ru'=>'mailru','Facebook.com'=>'facebook');
+            $Settings['Plugins.uLogin.providers'] = 'vkontakte,odnoklassniki,mailru,facebook';
         }
         if (!C('Plugins.uLogin.providers')){
-            $Settings['Plugins.uLogin.hidden'] = array('Twitter' => 'twitter', 'Google'=>'google','Yandex'=>'yandex','Live Journal'=>'livejournal', 'Open ID' => 'openid');
+            $Settings['Plugins.uLogin.hidden'] = 'other';
         }
         SaveToConfig($Settings);
     }
@@ -134,8 +134,8 @@ class uLoginPlugin extends Gdn_Plugin {
 
     private function _GetPanel($id = '',$type='panel',$forced=false){
         $redirect = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
-        $providers = implode(',', C('Plugins.uLogin.providers'));
-        $hidden = implode(',', C('Plugins.uLogin.hidden'));
+        $providers = C('Plugins.uLogin.providers');
+        $hidden = C('Plugins.uLogin.hidden');
         $panel_path = 'http://'.$_SERVER['SERVER_NAME'].$this->GetWebResource('views/upanel.php?id='.$id.'&type='.$type.'&redirect='.$redirect."&forced=".$forced);
         $panel_path .= '&providers='.$providers.'&hidden='.$hidden;
         $panel = file_get_contents($panel_path);
@@ -157,7 +157,7 @@ class uLoginPlugin extends Gdn_Plugin {
             
             $UserData['Password'] = $this->_genPassword();
             $identity = parse_url($user['identity']);
-            $UserData['Name'] = (isset($user['nickname']) ? $user['nickname'] : $user['last_name'].' '.$user['first_name']).' '.time();
+            $UserData['Name'] = (isset($user['nickname']) ? $user['nickname'] : $user['last_name'].' '.$user['first_name']);
             $UserData['Email'] = strpos($user['manual'],'email')===FALSE ? time().'_'.$user['email']: time().'_umf_'.$user['email'];
             $UserData['ShowEmail'] = '0';
             $UserData['Gender'] = isset($user['sex']) ?($user['sex'] == '2' ? 'm' : 'f') : 'm';
@@ -174,7 +174,9 @@ class uLoginPlugin extends Gdn_Plugin {
             $uLoginUser = Gdn::Database()->Query($Query);
             
             if (count($uLoginUser->Result()) == 0){
-                
+
+
+
                 while($UserModel->GetByUsername($UserData['Name'])){
                     $UserData['Name'] = (isset($user['nickname']) ? $user['nickname'] : $user['last_name'].' '.$user['first_name']).' '.time();
                 }
